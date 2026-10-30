@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: demo
+  ai:
+    mcp:
+      server:
+        name: bank-budget-service
+        version: 0.0.1
+        instructions: >-
+          This server exposes read-only tools for bank budgeting data.
+          Use get_limits for a customer's limit history and
+          get_exceeded_transactions to retrieve transactions that exceeded
+          the applicable limit. Do not infer data that the tools did not return.
+        type: SYNC
+        protocol: STREAMABLE
+        annotation-scanner:
+          enabled: true
+
+app:
+  retry:
+    fixed-delay-ms: 60000
+
+integration:
+  fxapi:
+    base-url: https://api.fxapi.com
+    api-key: ${FXAPI_API_KEY}
+    client:
+      connect-timeout: 3s
+      read-timeout: 5s
